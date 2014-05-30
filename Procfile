@@ -1,1 +1,1 @@
-web: gunicorn dockcounter:app
+web: gunicorn run:app

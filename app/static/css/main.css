@@ -1,0 +1,57 @@
+body
+{
+    margin-top: 50px;
+    min-height: 500px;
+    background: #2B2B2B;
+    text-align: center;
+    color: #E6E6E6;
+}
+
+.errMsg
+{
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: -4px;
+}
+.login
+{
+}
+.loginForm
+{
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}
+.loginInput
+{
+    height: 30px !important;
+    margin-bottom: 11px !important;
+    width: 145px !important;
+
+    border-radius: 4px;
+}
+.submitBtn
+{
+    position: fixed;
+    display: block;
+    top: 568px;
+    width: 145px !important;
+    height: 40px !important;
+    margin-top: 30px;
+    margin-left: 28px;
+    border-radius: 5px; 
+}
+
+#signup
+{
+    position: fixed;
+    top: 670px;
+    margin-left: -107px;
+    padding: 20px;
+}
+#logo
+{
+    width: 450px;
+    height: 628px;
+    margin-bottom: -202px;
+}
