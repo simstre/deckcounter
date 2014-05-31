@@ -6,13 +6,13 @@ DEBUG = True
 ###############################################################################
 # Constant
 ###############################################################################
-SECRET_KEY = "\xf4\t\xa2\xea\xfb[\xbb\xaa|\xf3~\xe2ak.\xcf\x0bh\x13\xbex\xa5\xfe\xe9"
+SECRET_KEY = ENV['SECRET_KEY']
 SESSION_COOKIE_NAME = "deckcounter"
 
 ###############################################################################
 # Connection
 ###############################################################################
-REDIS_HOST = 'pub-redis-14083.us-east-1-3.1.ec2.garantiadata.com'
-REDIS_PASSWORD = "d0SsEq7yLJAaIdNP"
-REDIS_PORT = 14083
+REDIS_HOST = ENV['REDIS_ENDPOINT']
+REDIS_PASSWORD = ENV['REDIS_PASSWORD']
+REDIS_PORT = ENV['REDIS_PORT']
 REDIS_DB = 0
