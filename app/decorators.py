@@ -8,5 +8,5 @@ def login_required(method):
         if 'username' in session:
             return method(*args, **kwargs)
         else:
-            return redirect(url_for('login'))
+            return redirect(url_for('.front'))
     return wrapper

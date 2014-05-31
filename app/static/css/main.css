@@ -9,6 +9,7 @@ body
 
 .errMsg
 {
+    color: #FF8080;
     font-size: 0.9em;
     text-align: center;
     margin-top: -4px;
@@ -24,6 +25,7 @@ body
 }
 .loginInput
 {
+    color: #3B3B3B;
     height: 30px !important;
     margin-bottom: 11px !important;
     width: 145px !important;
@@ -54,4 +56,11 @@ body
     width: 450px;
     height: 628px;
     margin-bottom: -202px;
+}
+#signupImg
+{
+    width:407px;
+    height: 573px;
+    margin-top: 28px;
+    margin-bottom: -175px;
 }

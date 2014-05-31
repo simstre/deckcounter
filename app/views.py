@@ -16,6 +16,7 @@ main = Blueprint('app', __name__, template_folder='templates', static_folder='st
 ###############################################################################
 # Constant
 ###############################################################################
+USER_PREFIX = "user::"
 
 
 ###############################################################################
@@ -26,33 +27,65 @@ def front():
     if request.method == 'GET':
         return render_template('front.html')
     else:
-        success, next_view = validate_credential(request.form)
+        success, next_view = _validate_credential(request.form)
         return redirect(url_for('.' + next_view))
+        # TODO: rate limit to 3 tries, then lock for 1hr, redirect to forgot password page
 
-        # Authenticate user (rate limit to 3 tries, then lock for 1hr, redirect to forgot password page)
-        # If first time using app, redirect to "what are you looking for?" page
-        # Display main deck, what makes more sense? pins on map showing what people are selling? or "trends" or "hot items" or "similar stuff"?
+
+@main.route('/menu')
+@login_required
+def menu():
+    return render_template('menu.html')
 
 
 @main.route('/create/deck')
 @login_required
 def create_deck():
-    return render_template('listings.html', listings=listings)
+    return 
+
 
 @main.route('/count/deck')
 @login_required
 def count_deck():
-    return render_template('listings.html', listings=listings)
+    return 
 
-@main.route('/signup')
-@login_required
+
+@main.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('listings.html', listings=listings)
+    if request.method == 'GET':
+        return render_template('signup.html')
+    else:
+        success = _create_credential(request.form)
+        if success:
+            return redirect(url_for('.menu'))
+        else:
+            return redirect(url_for('.signup'))
 
 ###############################################################################
 # Helper function
 ###############################################################################
-def validate_credential(form):
+def _create_credential(form):
+    req = ['username', 'password']
+    for field in req:
+        if not form.get(field):
+            flash("Missing " + field)
+            return False
+    username = form.get('username')
+    password = form.get('password')
+    email = form.get('email', None)
+
+    exist = redis.hexists(USER_PREFIX + username, "password")
+    if exist:
+        flash("Username already in use")
+        return False
+    redis.hset(USER_PREFIX + username, "password", password)
+    if email:
+        redis.hset(USER_PREFIX + username, "email", email)
+    session['username'] = username
+    return True
+
+
+def _validate_credential(form):
     req = ['username', 'password']
     for field in req:
         if not form.get(field):
@@ -70,16 +103,16 @@ def validate_credential(form):
 #            app.logger.warning(traceback.format_exc() + "username: " + username)
 #            return redirect(url_for('error', error="Server unavailable"))
 
-    correct_password = redis.hget("user::" + username, "password")
+    correct_password = redis.hget(USER_PREFIX + username, "password")
     
     # Checks if the user is in the DB
     if correct_password is not None:
         # Password validation
         if password == correct_password:
-            return True, 'front'
+            session['username'] = username
+            return True, 'menu'
         else:
-            #flash(parser.unescape(gettext("errorLogin")))
-            #return redirect(url_for('login'))
+            flash("Invalid credential, try again")
             return False, 'front'
     else:
         # redirect user to sign up for us
