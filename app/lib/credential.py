@@ -3,6 +3,8 @@ from app import redis, app
 import traceback
 
 
+USER_PREFIX = "user::"
+
 class Credential:
     ''' class of credential methods '''
     def _create_credential(self, form):
