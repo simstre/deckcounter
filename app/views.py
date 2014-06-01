@@ -26,22 +26,30 @@ def front():
 
 @main.route('/menu/')
 def menu():
-    return render_template('menu.html')
-
-
-@main.route('/deck/')
-def choose_deck():
-    return 
-
-
-@main.route('/deck/create/')
-def create_deck():
-    return 
+    if session.get('username'):
+        return render_template('menu.html', session=1) 
+    return render_template('menu.html', session=0)
 
 
 @main.route('/deck/count/')
 def count_deck():
-    return 
+    return render_template('count_deck.html')
+
+
+@main.route('/deck/')
+def choose_deck():
+    if session.get('username'):
+        # TODO: check if the user has any deck saved, if so, display a thumbnail for each deck
+        return render_template('choose_deck.html', decks=[])
+    else:
+        return render_template('choose_deck.html', decks=[])
+
+
+@main.route('/deck/create/')
+def create_deck():
+    return render_template('create_deck.html')
+
+
 
 
 @main.route('/signup', methods=['GET', 'POST'])

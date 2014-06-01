@@ -36,13 +36,23 @@ body
     margin-top: 10px;
     border-radius: 5px; 
 }
-
-#signup
+.btnLink
 {
     width: 210px;
     margin-top: 40px;
     padding: 20px;
 }
+.deckThumb
+{
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+}
+.deckBtn
+{
+    margin: 8px;
+}
+
 #logo
 {
     width: 450px;

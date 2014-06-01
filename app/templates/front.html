@@ -18,7 +18,7 @@
         </p>
         <input type="submit" value="Sign In" class="btn btn-success submitBtn login">
     </form>
-    <a id="signup" href="{{ url_for('.signup') }}" class="btn btn-primary">Sign Up to save your decks</a>
-    <a id="signup" href="{{ url_for('.menu') }}" class="btn btn-info">Count decks without login</a>
+    <a href="{{ url_for('.signup') }}" class="btn btnLink btn-primary">Sign Up to save your decks</a>
+    <a href="{{ url_for('.menu') }}" class="btn btnLink btn-info">Count decks without login</a>
 </div>
 {% endblock %}

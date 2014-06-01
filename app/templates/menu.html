@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-Greetings
+	{% if session %}
+    	<a href="{{ url_for('.choose_deck') }}" class="btn btnLink btn-danger">Count my own deck</a><br/>
+    {% else %}
+    	<a href="{{ url_for('.create_deck') }}" class="btn btnLink btn-danger">Count my own deck</a><br/>
+    {% endif %}
+    <a href="{{ url_for('.count_deck') }}" class="btn btnLink btn-warning">Count my opponent's deck</a>
 </div>
 {% endblock %}
