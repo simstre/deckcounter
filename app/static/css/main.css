@@ -14,9 +14,6 @@ body
     text-align: center;
     margin-top: -4px;
 }
-.login
-{
-}
 .loginForm
 {
     margin: auto;
@@ -34,21 +31,16 @@ body
 }
 .submitBtn
 {
-    position: fixed;
-    display: block;
-    top: 568px;
     width: 145px !important;
     height: 40px !important;
-    margin-top: 30px;
-    margin-left: 28px;
+    margin-top: 10px;
     border-radius: 5px; 
 }
 
 #signup
 {
-    position: fixed;
-    top: 670px;
-    margin-left: -107px;
+    width: 210px;
+    margin-top: 40px;
     padding: 20px;
 }
 #logo
