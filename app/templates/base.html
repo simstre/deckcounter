@@ -7,10 +7,13 @@
         {% block css %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
             <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/nano.css') }}" />
         {% endblock %}
         {% block script %}
             <script src="http://code.jquery.com/jquery.js"></script>
+            <link rel="stylesheet" href="{{ url_for('static',filename='js/nanoscroller.min.js') }}" />
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+            <script>$(".nano").nanoScroller();</script>
         {% endblock %}
     </head>
     <body>

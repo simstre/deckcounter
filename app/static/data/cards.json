@@ -1,9 +1,7 @@
 {
     "meta": {
             "patch": "1.0.0.5314",
-            "last_updated": "08.05.2014",
-            "repository": "http://github.com/pdyck/hearthstone-db",
-            "updated_by": "@philippdyck"
+            "last_updated": "08.05.2014"
         },
     "cards": [
       {

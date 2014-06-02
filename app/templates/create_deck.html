@@ -1,6 +1,118 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-create_deck()
+	<h2>Create a deck</h2>
+
+	{% if not active %}
+		{% set active='Warrior' %}
+	{% endif %}
+	{% if not view %}
+		{% set view='class' %}
+	{% endif %}
+	{% if not category %}
+		{% set category='All' %}
+	{% endif %}
+
+	<!-- Navigation tabs -->
+	<ul class="nav nav-pills nav-justified">
+		{% set classes = ['Warrior', 'Shaman', 'Rogue', 'Paladin', 'Hunter', 'Druid', 'Warlock', 'Mage', 'Priest'] %}
+		{% for class in classes %}
+			{% if active %}
+				{% if class == active %}
+					<li class="active">
+				{% else %}
+					<li>
+				{% endif %}
+			{% else %}
+				{% if class == 'Warrior' %}
+					<li class="active">
+				{% else %}
+					<li>
+				{% endif %}
+			{% endif %}
+			<a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=class) }}">{{ class }}</a></li>
+		{% endfor %}
+	</ul>
+	<!-- Navigation tabs end -->
+
+	<!-- Class/Common cards tabs -->
+	<ul class="nav nav-pills nav-stacked" style="width:150px; margin-top: 50px;" id="classTabs">
+		{% if view == 'common' %}
+			<li><a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=active, view='class') }}">{{ active }} cards</a></li>
+			<li class="active"><a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=active, view='common') }}">Common cards</a></li>
+		{% else %}
+			<li class="active"><a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=active, view='class') }}">{{ active }} cards</a></li>
+			<li><a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=active, view='common') }}">Common cards</a></li>
+		{% endif %}
+	</ul>
+	<!-- Class/Common cards tabs end -->
+
+	<!-- Card list -->
+	<div style="margin-top:-85px;" class="nano">
+		<ul class="nano-content">
+		{% set card_list = [] %}
+		{% if data %}
+			{% for card in data %}
+				{% if view and view == 'common' %}
+					{% if card.get('hero') == 'neutral' and card.get('collectible') and card.get('category') != 'hero' %}
+						{% do card_list.append(card) %}
+					{% endif %}
+				{% else %}
+					{% if card.get('hero') == active.lower() and card.get('collectible') and card.get('category') != 'hero' %}
+						{% if category == 'All' or card.get('category') == category.lower() or (category == 'Secret' and card.get('category') == 'spell' and card.get('effect_list') and card.get('effect_list')[0]['effect'] == 'secret') %}
+							{% do card_list.append(card) %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+			{% for card in card_list|sort(attribute='mana') %}
+
+
+
+
+				<!-- add onClick event to add to a deck -->
+
+
+
+
+				<li class="card">
+					<img src="{{ url_for('static', filename="img/card_frame.png/") }}" alt="card frame" id="cardFrame">
+					<img src="{{ url_for('static', filename="img/%d.png/" % card.get('mana')) }}" alt="card frame" id="manaCost">
+					{{ card.get('name') }}
+				</li>
+			{% endfor %}
+		{% endif %}
+		</ul>
+	</div>
+	<!-- Card list end -->
+
+	<div id="search">
+  		<input type="text" class="loginInput" placeholder="Search">
+
+
+
+  		<!-- AUTO-COMPLETE GOES HERE -->
+
+
+  		
+	</div>
+
+	<!-- Category tabs -->
+	{% if not view == 'common' %}
+	<ul class="nav nav-pills nav-stacked" id="catTabs">
+		{% set cat_list = ['All', 'Spell', 'Minion', 'Weapon', 'Secret'] %}
+		{% for cat in cat_list %}
+			{% if cat == category %}
+				<li class="active">
+			{% else %}
+				<li>
+			{% endif %}
+			<a onClick="window.location.reload()" href="{{ url_for('.create_deck', active=active, view=view, category=cat) }}">{{ cat }}</a></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<!-- Category tabs end -->
+
+
 </div>
 {% endblock %}

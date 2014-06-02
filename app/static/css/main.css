@@ -6,6 +6,14 @@ body
     text-align: center;
     color: #E6E6E6;
 }
+ul
+{
+    list-style-type: none;
+}
+a
+{
+    text-decoration: none !important;
+}
 
 .errMsg
 {
@@ -52,6 +60,13 @@ body
 {
     margin: 8px;
 }
+.card
+{
+    color: #fff;
+
+    text-align: left;
+    height: 30px;
+}
 
 #logo
 {
@@ -65,4 +80,41 @@ body
     height: 573px;
     margin-top: 28px;
     margin-bottom: -175px;
+}
+#classTabs>li.active>a
+{
+    color: #fff;
+    background-color: #DE4B4B !important;
+}    
+#classTabs>li>a
+{
+    color: #DE4B4B;
+}
+#catTabs
+{
+    width: 150px;
+    position: fixed;
+    top: 370px;
+}
+#catTabs>li.active>a
+{
+    color: #fff;
+    background-color: #47BA47 !important;
+}    
+#catTabs>li>a
+{
+    color: #47BA47;
+}
+#search
+{
+    text-align: left;
+    margin-left: 5px;
+    position: fixed;
+    top: 320px;
+    left: 0;
+}
+#manaCost
+{
+    margin-left: -204px;
+    margin-right: 8px;
 }
